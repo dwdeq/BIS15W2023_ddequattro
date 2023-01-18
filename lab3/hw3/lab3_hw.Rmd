@@ -3,9 +3,9 @@ title: "Lab 3 Homework"
 author: "Dominic \"DQ\" De Quattro"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ## Instructions
@@ -42,6 +42,13 @@ colMeans(sleep[,2:11])
 ```
 # there are no NAs, since all of the values exist; however, several values have been replaced with "-999"
 
+```{r}
+sleep <- replace(sleep, sleep < 0, NA) 
+sleep
+```
+#I've now replaced all of the -999s with NAs, so yes, there are now NAs.
+
+
 5. Show a list of the column names is this data frame.
 ```{r}
 names(sleep)
@@ -64,7 +71,6 @@ large
 ```{r}
 mean(small$`body weight in kg`)
 ```
-
 ```{r}
 mean(large$`body weight in kg`)
 ```
@@ -73,15 +79,15 @@ mean(large$`body weight in kg`)
 ```{r}
 mean(small$`total sleep (hrs/day)  (sum of slow wave and paradoxical sleep)`)
 ```
-
 ```{r}
 mean(large$`total sleep (hrs/day)  (sum of slow wave and paradoxical sleep)`,na.rm=TRUE)
 ```
+#According to the data, small animals sleep more
 
 10. Which animal is the sleepiest among the entire dataframe?
 ```{r}
-x <- max(sleep[,6])
-sleep[(sleep[,6]==x),]
+x <- max(sleep[,6],na.rm=TRUE)
+na.exclude(sleep[(sleep[,6]==x),])
 ```
 
 ## Push your final code to GitHub!
