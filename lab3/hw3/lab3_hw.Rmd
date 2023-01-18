@@ -46,7 +46,7 @@ colMeans(sleep[,2:11])
 sleep <- replace(sleep, sleep < 0, NA) 
 sleep
 ```
-#I've now replaced all of the -999s with NAs, so yes, there are now NAs.
+# I've now replaced all of the -999s with NAs, so yes, there are now NAs.
 
 
 5. Show a list of the column names is this data frame.

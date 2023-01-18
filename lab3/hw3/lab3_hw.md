@@ -113,7 +113,7 @@ sleep
 ## #   ⁵​`total sleep (hrs/day)  (sum of slow wave and paradoxical sleep)`,
 ## #   ⁶​`maximum life span (years)`, ⁷​`gestation time (days)`, …
 ```
-#I've now replaced all of the -999s with NAs, so yes, there are now NAs.
+# I've now replaced all of the -999s with NAs, so yes, there are now NAs.
 
 
 5. Show a list of the column names is this data frame.
