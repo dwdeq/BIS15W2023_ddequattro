@@ -1,0 +1,42 @@
+---
+title: "Lab 4 Warm-up"
+output: html_document
+date: "2023-01-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. In a new R Markdown document, load the tidyverse and a package called `palmerpenguins`.
+```{r message=FALSE, warning=FALSE}
+library("tidyverse")
+library("palmerpenguins")
+```
+
+## 2. What are the dimensions of the dataset `penguins`?
+```{r}
+dim(penguins)
+```
+The dimensions are 344 rows by 8 columns.
+
+## 3. What are the names of the variables in the `penguins` dataset?
+```{r}
+names(penguins)
+```
+
+## 4. How many individuals were sampled on each island in the `penguins` dataset?
+```{r}
+sum(penguins[,2] == "Biscoe")
+sum(penguins[,2] == "Dream")
+sum(penguins[,2] == "Torgersen")
+```
+In summary, 168 penguins from Biscoe, 124 penguins from Dream, and 52 penguins from Torgersen.
+
+## 5. What is the mean body mass for all individuals in the `penguins` dataset?
+```{r}
+colMeans(penguins[,6],na.rm=TRUE)
+```
+The mean body mass is 4200g, or 4.20kg.
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
