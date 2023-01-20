@@ -1,11 +1,11 @@
 ---
 title: "Lab 4 Homework"
-author: "Please Add Your Name Here"
+author: "Dominic \"DQ\" De Quattro"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -123,10 +123,17 @@ deer
 ```{r}
 filter(deer,deer$mean.mass.g == max(deer$mean.mass.g))
 ```
-Alces alces
 #STOPPED WORK HERE.
+```{r}
+filter(homerange,homerange$genus=="alces" & homerange$species=="alces")[,2]
+```
 
 **10. As measured by the data, which snake species has the smallest homerange? Show all of your work, please. Look this species up online and tell me about it!** **Snake is found in taxon column**    
+```{r}
+snakes <- filter(homerange,homerange$taxon=="snakes")
+filter(snakes,snakes$log10.hra==min(snakes[,14]))
+```
+The Namaqua Dwarf Adder is a small snake found in Southern Africa. Its bite is venomous, but its venom isn't strong enough to kill a full grown man. It is possibly one of the smallest vipers on Earth.
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   
