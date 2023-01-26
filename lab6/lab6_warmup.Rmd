@@ -1,0 +1,28 @@
+---
+title: "lab6_warmup"
+output: html_document
+date: "2023-01-26"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+### 1. Open the data `ecs21351-sup-0003-SupplementS1.csv`
+```{r}
+data <- readr::read_csv("data/ecs21351-sup-0003-SupplementS1.csv")
+```
+
+```{r}
+data <- data[2:nrow(data),]
+```
+
+```{r}
+names(data)
+```
+
+
