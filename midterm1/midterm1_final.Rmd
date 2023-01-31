@@ -58,6 +58,7 @@ ecosphere %>%
   group_by(habitat) %>% 
   summarize(n_species=n())
 ```
+#The Woodland has the largest species richness (or "diversity").
 
 Run the code below to learn about the `slice` function. Look specifically at the examples (at the bottom) for `slice_max()` and `slice_min()`. If you are still unsure, try looking up examples online (https://rpubs.com/techanswers88/dplyr-slice). Use this new function to answer question 5 below.
 ```{r}
