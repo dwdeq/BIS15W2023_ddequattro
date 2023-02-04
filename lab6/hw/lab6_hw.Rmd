@@ -10,6 +10,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(warn=-1)
 ```
 
 ## Instructions
@@ -50,18 +51,18 @@ fisheries$fao_major_fishing_area <- as.factor(fisheries$fao_major_fishing_area)
 
 We need to deal with the years because they are being treated as characters and start with an X. We also have the problem that the column names that are years actually represent data. We haven't discussed tidy data yet, so here is some help. You should run this ugly chunk to transform the data for the rest of the homework. It will only work if you have used janitor to rename the variables in question 2!
 ```{r}
-# fisheries_tidy <- fisheries %>%
-#  pivot_longer(-c(country,common_name,isscaap_group_number,isscaap_taxonomic_group,asfis_species_number,asfis_species_name,fao_major_fishing_area,measure),
-#               names_to = "year",
-#               values_to = "catch",
-#               values_drop_na = TRUE) %>%
-#  mutate(year= as.numeric(str_replace(year, 'x', ''))) %>%
-#  mutate(catch= str_replace(catch, c(' F'), replacement = '')) %>%
-#  mutate(catch= str_replace(catch, c('...'), replacement = '')) %>%
-#  mutate(catch= str_replace(catch, c('-'), replacement = '')) %>%
-#  mutate(catch= str_replace(catch, c('0 0'), replacement = ''))
-# 
-# fisheries_tidy$catch <- as.numeric(fisheries_tidy$catch)
+fisheries_tidy <- fisheries %>%
+ pivot_longer(-c(country,common_name,isscaap_group_number,isscaap_taxonomic_group,asfis_species_number,asfis_species_name,fao_major_fishing_area,measure),
+              names_to = "year",
+              values_to = "catch",
+              values_drop_na = TRUE) %>%
+ mutate(year= as.numeric(str_replace(year, 'x', ''))) %>%
+ mutate(catch= str_replace(catch, c(' F'), replacement = '')) %>%
+ mutate(catch= str_replace(catch, c('...'), replacement = '')) %>%
+ mutate(catch= str_replace(catch, c('-'), replacement = '')) %>%
+ mutate(catch= str_replace(catch, c('0 0'), replacement = ''))
+
+fisheries_tidy$catch <- as.numeric(fisheries_tidy$catch)
 
 fisheries <- fisheries_tidy
 ```
@@ -119,7 +120,7 @@ fish %>%
   group_by(country) %>% 
   filter(year <= 2012 & year >= 2008) %>% 
   filter(isscaap_taxonomic_group == "Squids, cuttlefishes, octopuses") %>% 
-  summarize(cephalopods = max(catch,na.rm=TRUE)) %>% 
+  summarize(cephalopods = max(catch,na.rm=T)) %>% 
   arrange(desc(cephalopods)) %>%
   head(n=5)
 ```
@@ -135,7 +136,7 @@ fish %>%
 ```
 
 10. Use the data to do at least one analysis of your choice.
-#Which country caught the most caught fish between 2008 and 2012? 
+##Which country caught the most caught fish between 2008 and 2012? 
 ```{r}
 fish %>%
   filter(asfis_species_name == "Trichiurus lepturus") %>% 
