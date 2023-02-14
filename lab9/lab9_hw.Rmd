@@ -23,11 +23,12 @@ library(tidyverse)
 library(janitor)
 library(here)
 library(naniar)
+library(dplyr)
 ``` 
 
 For this homework, we will take a departure from biological data and use data about California colleges. These data are a subset of the national college scorecard (https://collegescorecard.ed.gov/data/). Load the `ca_college_data.csv` as a new object called `colleges`.
 ```{r}
-
+colleges <- read_csv(here("data","ca_college_data.csv"))
 ```
 
 The variables are a bit hard to decipher, here is a key:  
@@ -45,78 +46,112 @@ PFTFTUG1_EF: Percentage of undergraduate students who are first-time, full-time 
 
 1. Use your preferred function(s) to have a look at the data and get an idea of its structure. Make sure you summarize NA's and determine whether or not the data are tidy. You may also consider dealing with any naming issues.
 ```{r}
-
+glimpse(colleges)
 ```
 
 ```{r}
-
+colleges <- colleges %>% 
+  na_if("NA") %>%  
+  rename("name"=INSTNM,"state"=STABBR,"tuition"=COSTT4_A,"grad_rate"=C150_4_POOLED,"percent_bio"=PCIP26,"percent_FTFT"=PFTFTUG1_EF) %>% 
+  clean_names() %>% 
+  arrange(name)
+colleges
 ```
 
-```{r}
-
-```
 
 2. Which cities in California have the highest number of colleges?
 ```{r}
-
+colleges %>% 
+  count(city) %>% 
+  arrange(desc(n))
 ```
 
 3. Based on your answer to #2, make a plot that shows the number of colleges in the top 10 cities.
 ```{r}
-
+colleges %>% 
+  count(city) %>% 
+  arrange(desc(n)) %>% 
+  head(n=10) %>% 
+  ggplot(aes(x=city, y=n)) +
+    geom_col() +
+    coord_flip()
+```
+```{r}
+colleges %>% 
+  filter(city == "Berkeley")
 ```
 
 4. The column `COSTT4_A` is the annual cost of each institution. Which city has the highest average cost? Where is it located?
 ```{r}
-
+colleges %>% 
+  group_by(city) %>% 
+  summarize(avg_tuition = mean(tuition)) %>% 
+  arrange(desc(avg_tuition))
 ```
 
 5. Based on your answer to #4, make a plot that compares the cost of the individual colleges in the most expensive city. Bonus! Add UC Davis here to see how it compares :>).
 ```{r}
-
+colleges %>% 
+  filter(city == "Malibu"|city == "Davis") %>% 
+  ggplot(aes(x=name,y=tuition))+
+    geom_col()+
+    coord_flip()
 ```
 
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
 ```{r}
-
+colleges %>% 
+  ggplot(aes(x=adm_rate,y=grad_rate))+geom_point()+geom_smooth(method=lm, se=F, na.rm=T)
 ```
 
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
 ```{r}
-
+colleges %>% 
+  ggplot(aes(x=tuition,y=grad_rate))+geom_point()+geom_smooth(method=lm, se=F, na.rm=T)
 ```
 
 8. The column titled `INSTNM` is the institution name. We are only interested in the University of California colleges. Make a new data frame that is restricted to UC institutions. You can remove `Hastings College of Law` and `UC San Francisco` as we are only interested in undergraduate institutions.
 ```{r}
-
+uc_colleges <- colleges %>% 
+  subset(grepl("University of California",name))
+uc_colleges
 ```
 
 Remove `Hastings College of Law` and `UC San Francisco` and store the final data frame as a new object `univ_calif_final`.
 ```{r}
-
+univ_calif_final <- uc_colleges  %>% 
+  filter(!grepl("Hastings|Francisco",name))
+univ_calif_final
 ```
 
 Use `separate()` to separate institution name into two new columns "UNIV" and "CAMPUS".
 ```{r}
-
+univ_calif_final <- univ_calif_final %>% 
+  separate(name,into=c("univ","campus"),sep='-')
 ```
 
 9. The column `ADM_RATE` is the admissions rate by campus. Which UC has the lowest and highest admissions rates? Produce a numerical summary and an appropriate plot.
 ```{r}
-
+univ_calif_final %>% 
+  filter(adm_rate == max(adm_rate) | adm_rate == min(adm_rate))
 ```
 
 ```{r}
-
+univ_calif_final %>% 
+  filter(adm_rate == max(adm_rate) | adm_rate == min(adm_rate)) %>% 
+  ggplot(aes(x=campus,y=adm_rate))+geom_col()+coord_flip()
 ```
 
 10. If you wanted to get a degree in biological or biomedical sciences, which campus confers the majority of these degrees? Produce a numerical summary and an appropriate plot.
 ```{r}
-
+univ_calif_final %>% 
+  slice_max(percent_bio)
 ```
 
 ```{r}
-
+univ_calif_final %>% 
+  arrange(desc(percent_bio)) %>% 
+  ggplot(aes(x=reorder(campus,+percent_bio),y=percent_bio))+geom_col()+coord_flip()
 ```
 
 ## Knit Your Output and Post to [GitHub](https://github.com/FRS417-DataScienceBiologists)
