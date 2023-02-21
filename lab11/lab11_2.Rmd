@@ -106,7 +106,7 @@ Access the help for `RColorBrewer`.
 
 The thing to notice is that there are three different palettes: 1) sequential, 2) diverging, and 3) qualitative. Within each of these there are several selections. You can bring up the colors by using `display.brewer.pal()`. Specify the number of colors that you want and the palette name.
 ```{r}
-display.brewer.pal(6,"RdPu")
+display.brewer.pal(3,"RdPu")
 ```
 
 The [R Color Brewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) website is very helpful for getting an idea of the color palettes. To make things easy, use these two guidelines:
@@ -270,12 +270,18 @@ ecosphere %>%
 ## Practice
 1. Build a faceted plot that shows a distribution of life expectancy by habitat type.
 ```{r}
-
+ecosphere %>% 
+  ggplot(aes(x=life_expectancy))+
+  geom_density()+
+  facet_wrap(~migratory_strategy, ncol=3)
 ```
 
 2. Try the same plot as #1 above, but include life_expectancy~habitat.
 ```{r}
-
+ecosphere %>% 
+  ggplot(aes(x=n))+
+  geom_density()+
+  facet_grid(life_expectancy~habitat, scales = "free_y")
 ```
 
 ## That's it, let's take a break!   
