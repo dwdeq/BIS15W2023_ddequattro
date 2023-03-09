@@ -1,6 +1,6 @@
 ---
 title: "Lab 14 Homework"
-author: "Your Name Here"
+author: "Dominic \"DQ\" De Quattro"
 date: "`r Sys.Date()`"
 output:
   html_document: 
@@ -16,36 +16,36 @@ If you want to return to the binder, find the [repository and instructions here]
 ## Instructions
 Answer the following questions in RMarkdown. Please embed all of your code and push your final work to your repository. Be sure to add your name to the author header above.
 
-
-
 ## Questions
 
 1. Look up 'Data Scientist' at https://www.bls.gov/. What degree is required for this career? Is it a growing occupation?  
-
+# A Bachelor's Degree is required. The field is rapidly growing, having an employment increase of 40,000 employed Data Scientists during 2021. 
 
 2. How would you describe your data science skills on a resume for a job application? Write a blurb that reflects the skills you have learned in this course. 
-
+# During my time [in this class], I learned how to effectively organize and clean data sets for the purpose of analyzing them. Some of the ways I have learned to analyze data include 
 
 3. What are your current career interests, and how could your R skills support that career path? (hint: this might be good content for your LinkedIn profile ;)
-
+# I plan on doing genomics research. Being able to work with something like R will be incredibly helpful for sorting genomic data.
 
 4. What about this course has been the most difficult for you? What has been the most rewarding?
+# The most difficult thing about this entire course was learning to use select and filter. At first, it wasn't clear to me how to use the submethods like contains() or starts_with(), and what the distinction between that and the logic used in filter() was.
 
+# The most rewarding was, by far, the graphs. Learning how to make, customize, and beautify them to display data in an aesthetically pleasing way was incredibly fun and I enjoyed it quite a bit.
 
-5. What do you wish you had known, or what skills do you wish you had, before taking this class.
-
+5. What do you wish you had known, or what skills do you wish you had, before taking this class?
+# Honestly, I feel like I was well prepared for the class thanks to my prior java knowledge. Although not many methods and syntaxes carried over, I still feel like have a conceptual grasp on coding was helpful to have before I started.
 
 6. If we had 1 more lab in this class, what would you have liked to learn more about?
+# I would've liked to learn about some of the ways r code can be manipulated and exported to be more helpful or accessible. For example, if there were some way to open a shiny app as an executable (or without having to open rstudio at all) that would've been cool to know.
 
-
-7. Now that you have (almost!) completed this course, do you plan to persue further data or computer science skills? What do you plan to do?
-
+7. Now that you have (almost!) completed this course, do you plan to pursue further data or computer science skills? What do you plan to do?
+#  I'm currently planning on pursuing a minor in Computational Biology, which involves a lot of time learning about data science and informatics.
 
 8. How important was working with a partner to your success in this class? If this class were transitioned to an online format, how do you think that would affect your understanding?
-
+# I don't think working with a partner in this class was necessary; sometimes it was useful, but for the most part, it was somewhat awkward and took time away from the class period.
 
 9. Did you complete the class evaluation? Please complete the class evaluation using the link provided in the announcements. Your feedback is very important and we appreciate your time.
-
+# I would, but I can't find the aforementioned link. I'll fill it out as soon as I find it.
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
